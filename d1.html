@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devotees List</title>
+</head>
+<body>
+  <h1>Devotees List</h1>
+
+  <!-- Existing devotees -->
+  <div class="devotee">
+    <img src="C:\mahaganapathi\gallery\aarthi.png" alt="Devotee 1">
+    <h3>Devotee 1 Name</h3>
+  </div>
+  <div class="devotee">
+    <img src="C:\mahaganapathi\gallery\aarthi.png" alt="Devotee 2">
+    <h3>Devotee 2 Name</h3>
+  </div>
+  <!-- Add more existing devotees here -->
+
+  <!-- Add new devotee form -->
+  <div class="add-devotee">
+    <h3>Add New Devotee</h3>
+    <form id="add-devotee-form">
+      <label for="new-devotee-name">Devotee Name:</label>
+      <input type="text" id="new-devotee-name" required>
+      <label for="new-devotee-image">Devotee Image:</label>
+      <input type="file" id="new-devotee-image" accept="image/*" required>
+      <button type="submit">Add</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("add-devotee-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      const newName = document.getElementById("new-devotee-name").value;
+      const newImage = document.getElementById("new-devotee-image").files[0];
+      
+      if (newName && newImage) {
+        const newDevotee = document.createElement("div");
+        newDevotee.className = "devotee";
+        
+        const newImageElement = document.createElement("img");
+        newImageElement.src = URL.createObjectURL(newImage);
+        newImageElement.alt = newName;
+        
+        const newNameElement = document.createElement("h3");
+        newNameElement.textContent = newName;
+        
+        newDevotee.appendChild(newImageElement);
+        newDevotee.appendChild(newNameElement);
+        
+        const addDevoteeForm = document.getElementById("add-devotee-form");
+        addDevoteeForm.parentNode.insertBefore(newDevotee, addDevoteeForm);
+        
+        addDevoteeForm.reset();
+      }
+    });
+  </script>
+</body>
+</html>
